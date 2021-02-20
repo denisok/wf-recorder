@@ -397,7 +397,7 @@ void handle_sigint(int)
 static bool user_specified_overwrite(std::string filename)
 {
     struct stat buffer;   
-    if (stat (filename.c_str(), &buffer) == 0)
+    if (stat (filename.c_str(), &buffer) == 0 && !S_ISCHR(buffer.st_mode))
     {
         std::string input;
         std::cout << "Output file \"" << filename << "\" exists. Overwrite? Y/n: ";
